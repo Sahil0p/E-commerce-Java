@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premium Todo App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>My Tasks</h1>
+            <p>Stay organized, stay focused.</p>
+        </header>
+
+        <form action="/add" method="post" class="add-form">
+            <input type="text" name="title" placeholder="What needs to be done?" required autocomplete="off" autofocus>
+            <button type="submit" class="btn-add">Add</button>
+        </form>
+
+        <ul class="todo-list">
+            <li th:each="todo : ${todos}" th:class="${todo.completed ? 'todo-item completed' : 'todo-item'}">
+                <form action="#" th:action="@{/toggle/{id}(id=${todo.id})}" method="post" class="toggle-form">
+                    <button type="submit" class="btn-toggle">
+                        <svg th:if="${todo.completed}" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24px" height="24px"><path d="M0 0h24v24H0z" fill="none"/><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg>
+                        <div th:unless="${todo.completed}" class="empty-circle"></div>
+                    </button>
+                </form>
+                <span class="todo-title" th:text="${todo.title}">Task Title</span>
+                <form action="#" th:action="@{/delete/{id}(id=${todo.id})}" method="post" class="delete-form">
+                    <button type="submit" class="btn-delete" aria-label="Delete task">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20px" height="20px"><path d="M0 0h24v24H0z" fill="none"/><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+                    </button>
+                </form>
+            </li>
+            <li th:if="${#lists.isEmpty(todos)}" class="empty-state">
+                No tasks yet. Add one above!
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

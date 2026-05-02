@@ -1,0 +1,4 @@
+INSERT INTO product (name, description, price, image_url) VALUES ('Minimalist Watch', 'A sleek, minimalist timepiece.', 120.00, 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=300&q=80');
+INSERT INTO product (name, description, price, image_url) VALUES ('Wireless Earbuds', 'High quality sound without the wires.', 85.50, 'https://images.unsplash.com/photo-1572569438065-e390c5fa6f1e?auto=format&fit=crop&w=300&q=80');
+INSERT INTO product (name, description, price, image_url) VALUES ('Mechanical Keyboard', 'Tactile feedback for the typing enthusiast.', 150.00, 'https://images.unsplash.com/photo-1595225476474-87563907a212?auto=format&fit=crop&w=300&q=80');
+INSERT INTO product (name, description, price, image_url) VALUES ('Coffee Bean Blend', 'Premium dark roast coffee beans.', 18.00, 'https://images.unsplash.com/photo-1559525839-b184a4d698c7?auto=format&fit=crop&w=300&q=80');

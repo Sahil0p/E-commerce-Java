@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce - Cart</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container nav-content">
+            <a href="/" class="brand">E-Commerce</a>
+            <a href="/cart" class="cart-link">Cart</a>
+        </div>
+    </nav>
+
+    <main class="container cart-page">
+        <header class="page-header">
+            <h1>Your Shopping Cart</h1>
+        </header>
+
+        <div th:if="${message}" class="alert alert-success">
+            <p th:text="${message}"></p>
+        </div>
+
+        <div th:if="${cart != null and !cart.isEmpty()}">
+            <div class="cart-items">
+                <div th:each="item : ${cart}" class="cart-item">
+                    <img th:src="${item.imageUrl}" th:alt="${item.name}" class="cart-item-image">
+                    <div class="cart-item-details">
+                        <h3 th:text="${item.name}">Product Name</h3>
+                        <p class="price" th:text="'$' + ${item.price}">$0.00</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cart-summary">
+                <div class="total-row">
+                    <span>Total:</span>
+                    <span class="total-price" th:text="'$' + ${#numbers.formatDecimal(total, 1, 2)}">$0.00</span>
+                </div>
+                <div class="cart-actions">
+                    <form th:action="@{/cart/clear}" method="post">
+                        <button type="submit" class="btn btn-secondary">Clear Cart</button>
+                    </form>
+                    <form th:action="@{/checkout}" method="post">
+                        <button type="submit" class="btn btn-primary">Checkout</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div th:if="${cart == null or cart.isEmpty()}">
+            <div class="empty-cart">
+                <p>Your cart is empty.</p>
+                <a href="/" class="btn btn-primary">Continue Shopping</a>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 E-Commerce Demo.</p>
+    </footer>
+</body>
+</html>
